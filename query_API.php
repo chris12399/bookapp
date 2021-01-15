@@ -25,8 +25,6 @@
     $arr = json_encode($arr, JSON_UNESCAPED_UNICODE + JSON_PRETTY_PRINT);
     echo $arr;
 
-
-
     $result -> close();
     $conn -> close();
 

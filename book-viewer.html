@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!-- <html lang="en"> -->
+
 <head>
     <meta charset="utf-8">
     <title>Book List</title>
@@ -36,7 +37,9 @@
                 <th>Category</th>
                 <th>Year</th>
                 <th>ISBN</th>
+                <th>Action</th>
             </tr>
+
         </tbody>
     </table>
     <br>
@@ -44,39 +47,10 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
     </script>
     <script type="text/javascript">
-        let jsonUrl = "query_API.php";
-        $.getJSON(jsonUrl, function (data) {
-            for (let item in data){
-                //console.log(data);
-                let content = 
-                    "<tr>" +
-                    "<td>" + data[item].author + "</td>" +
-                    "<td>" + data[item].title + "</td>" +
-                    "<td>" + data[item].category + "</td>" +
-                    "<td>" + data[item].year + "</td>" +
-                    "<td>" + data[item].isbn + "</td>" +
-                    "</tr>";
-                $("#menu").append(content);
-            }
-        });
-
-        // $(function (){
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "query_API.php",
-        //         dataType: "JSON",
-        //         success: display,
-        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //             alert(XMLHttpRequest.status);
-        //             alert(XMLHttpRequest.readyState);
-        //             alert(textStatus);
-        //         }
-        //     });
-        // });
-        // function display(data) {
-            
-        //     console.log(data);
+        // let jsonUrl = "query_API.php";
+        // $.getJSON(jsonUrl, function (data) {
         //     for (let item in data){
+        //         //console.log(data);
         //         let content = 
         //             "<tr>" +
         //             "<td>" + data[item].author + "</td>" +
@@ -84,11 +58,44 @@
         //             "<td>" + data[item].category + "</td>" +
         //             "<td>" + data[item].year + "</td>" +
         //             "<td>" + data[item].isbn + "</td>" +
+        //             "<td>" + "<a href='book-update.html'>Update</a>" + 
+        //             "&nbsp;"  +  "<a href='delete_API.php'>Delete</a>" + "</td>" +
         //             "</tr>";
         //         $("#menu").append(content);
-        //     };
-            
-        // };
+        //     }
+        // });
+
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "query_API.php",
+                dataType: "JSON",
+                success: display,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+                }
+            });
+        });
+        function display(data) {
+
+            console.log(data);
+            for (let item in data) {
+                let content =
+                    "<tr>" +
+                    "<td>" + data[item].author + "</td>" +
+                    "<td>" + data[item].title + "</td>" +
+                    "<td>" + data[item].category + "</td>" +
+                    "<td>" + data[item].year + "</td>" +
+                    "<td>" + data[item].isbn + "</td>" +
+                    "<td>" + "<a href='book-update.html'>Update</a>" +
+                    "&nbsp;" + "<a href='delete_API.php'>Delete</a>" + "</td>" +
+                    "</tr>";
+                $("#menu").append(content);
+            };
+
+        };
 
     </script>
 
